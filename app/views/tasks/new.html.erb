@@ -1,2 +1,34 @@
-<h1>Tasks#new</h1>
-<p>Find me in app/views/tasks/new.html.erb</p>
+<div class="w-50">
+  <h1>New Task</h1>
+  
+  <%= form_with(model: @task, local: true) do |form| %>
+    
+    <% if @task.errors.any? %>
+      <div id="error_explanation" class="alert alert-danger">
+        <h2><%= pluralize(@task.errors.count, "error") %> prohibited this task from being saved:</h2>
+  
+        <ul>
+          <% @task.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    <div class="mb-3">
+      <%= form.label :title,"タイトル",class: 'form-label' %>
+      <%= form.text_field :title, class: 'form-control' %>
+    </div>
+    
+    <div class="mb-3">
+      <%= form.label :description,"説明",class: 'form-label' %>
+      <%= form.text_field :description, class: 'form-control' %>
+    </div>
+  
+    <div class="actions">
+      <%= form.submit class: 'btn btn-primary' %>
+      
+      <%= link_to 'Back', tasks_path,class: 'btn btn-secondary' %>
+    </div>
+  <% end %>
+</div>

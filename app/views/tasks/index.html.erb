@@ -1,2 +1,34 @@
-<h1>Tasks#index</h1>
-<p>Find me in app/views/tasks/index.html.erb</p>
+<p id="notice" class="text-success"><%= notice %></p>
+
+<h1>Tasks</h1>
+<%= link_to 'New Task', new_task_path %>
+<table class="table">
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>説明</th>
+      <th>タグ</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td>
+          <% if task.tags.present? %>
+            <% task.tags.split(',').each do |tag| %>
+              <span class="badge bg-primary"><%= tag.strip %></span>
+            <% end %>
+          <% else %>
+            No tags
+          <% end %>
+        </td>
+        <td><%= link_to 'Destroy', task_path(task), method: :delete, data: { confirm: '本当に削除しますか?' },class:"btn btn-sm btn-danger" %></td>
+      </tr>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
