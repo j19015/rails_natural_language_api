@@ -3,6 +3,9 @@ require 'net/https'
 
 class Task < ApplicationRecord
   after_save :assign_tags
+  
+  validates :title,presence: true
+  validates :description,presence: true
 
   private
 
